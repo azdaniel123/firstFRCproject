@@ -18,18 +18,28 @@ public class Collector extends SubsystemBase {
     private Collector() {
     }
 
+    /**
+     *  make a commandGroup was make the collector collect the game piece, wait 3 second, eject the game piece and wait 3 second again.
+     * @return a SequentialCommandGroup was make the collector collect the game piece, wait 3 second, eject the game piece and wait 3 second again.
+     */
     public SequentialCommandGroup getCollectThenEjectCommand() {
         return new SequentialCommandGroup(getCollectCommand().withTimeout(3), getEjectCommand().withTimeout(3));
     }
 
-    public CommandBase getCollectCommand() {
-        return startEnd(this::collect, this::stop);
-    }
+    /**
+     * make a command was make the collector collect the game piece.
+     * @return a startEndCommend was make the collector collect the game piece and stop the motor.
+     */
+    public CommandBase getCollectCommand() {return startEnd(this::collect, this::stop);}
 
+    /**
+     * make a command was make the collector eject the game piece.
+     * @return a startEndCommend was make the collector eject the game piece and stop the motor.
+     */
     public CommandBase getEjectCommand() {
         return startEnd(this::eject, this::stop);
-
     }
+
 
     private void collect() {
         motor.setVoltage(CollectorConstants.COLLECT_VOLTAGE);

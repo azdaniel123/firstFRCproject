@@ -21,6 +21,10 @@ public class Steer extends SubsystemBase {
     private Steer() {
     }
 
+    /**
+     * make a command was make the steer align to 90 degrees, wait 3 second, align to 180 degrees, wait 3 second again and align to 0 degrees.
+     * @returna command was make the steer align to 90 degrees, wait 3 second, align to 180 degrees, wait 3 second again, align to 0 degrees and stop the motor.
+     */
     public CommandBase getSetTargetAngleCOM(){
         return new SequentialCommandGroup(
                 getSetTargetAngle(90).withTimeout(3),
@@ -29,16 +33,26 @@ public class Steer extends SubsystemBase {
         );
     }
 
-    public CommandBase supplierToAngleValue(Supplier<Double> angle){
+    /**
+     * make a command was get a Supplier<Double> and align to the value of the Supplier<Double>.
+     * @param angleSupplier is a Supplier<Double> the command align to his value.
+     * @return  a command was get a Supplier<Double> and align to the value of the Supplier<Double>.
+     */
+    public CommandBase supplierToAngleValue(Supplier<Double> angleSupplier){
         return new FunctionalCommand(
                 () -> {},
-                () -> setTargetAngle(angle.get()),
+                () -> setTargetAngle(angleSupplier.get()),
                 (interrupted) -> stop(),
                 () -> false,
                 this
         );
     }
 
+    /**
+     * make a Command was get an angle and align to that angle.
+     * @param angle is a double of the angle we need to double to her.
+     * @return a Command was get an angle, align to that angle and stop the motor.
+     */
     public CommandBase getSetTargetAngle(double angle){
         return startEnd(
                 () -> setTargetAngle(angle),

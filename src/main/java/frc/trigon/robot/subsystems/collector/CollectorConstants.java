@@ -17,7 +17,7 @@ public class CollectorConstants {
     static final double
             COLLECT_VOLTAGE = 6,
 
-            EJECT_VOLTAGE = 6;
+            EJECT_VOLTAGE = -6;
 
     static {
         TalonFXConfiguration configuration = new TalonFXConfiguration();

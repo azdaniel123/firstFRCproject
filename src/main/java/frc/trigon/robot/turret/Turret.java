@@ -32,15 +32,15 @@ public class Turret extends SubsystemBase {
     }
 
     /**
-     * make the turret Tune in to the hub.
-     * @param carrotPoseidonSupplier
-     * @param hasTargetSupplier
-     * @return
+     * make a command was make the turret align to the reflector.
+     * @param currentPoseidonSupplier the distances of the turret from the reflector.
+     * @param hasTargetSupplier check if you see the reflector.
+     * @return FunctionalCommand was make the turret Tune in to the reflector.
      */
-    public CommandBase getAlainToReflectorCommend(Supplier<Double> carrotPoseidonSupplier, Supplier<Boolean> hasTargetSupplier){
+    public CommandBase getAlainToReflectorCommend(Supplier<Double> currentPoseidonSupplier, Supplier<Boolean> hasTargetSupplier){
         return new FunctionalCommand(
                 () -> {},
-                () -> alainToReflector(carrotPoseidonSupplier.get(), hasTargetSupplier.get() ),
+                () -> alignToReflector(currentPoseidonSupplier.get(), hasTargetSupplier.get() ),
                 (interrupted) -> stop(),
                 () -> false,
                 this
@@ -49,7 +49,7 @@ public class Turret extends SubsystemBase {
     }
 
 
-    private void alainToReflector(double carrotPoseidon, boolean hasTarget){
+    private void alignToReflector(double carrotPoseidon, boolean hasTarget){
         if (!hasTarget){
             VoltageOut request = new VoltageOut(5);
             MOTOR.setControl(request);
