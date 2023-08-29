@@ -32,15 +32,15 @@ public class Turret extends SubsystemBase {
     }
 
     /**
-     * make a command was make the turret align with the reflector.
-     * @param currentPoseidonSupplier the distances of the turret from the reflector.
+     * create a command is make the turret align with the reflector.
+     * @param currentPositionSupplier the Position of the reflector.
      * @param hasTargetSupplier check if you see the reflector.
      * @return FunctionalCommand was make the turret align to the reflector.
      */
-    public CommandBase getAlignToReflectorCommend(Supplier<Double> currentPoseidonSupplier, Supplier<Boolean> hasTargetSupplier){
+    public CommandBase getAlignToReflectorCommend(Supplier<Double> currentPositionSupplier, Supplier<Boolean> hasTargetSupplier){
         return new FunctionalCommand(
                 () -> {},
-                () -> alignToReflector(currentPoseidonSupplier.get(), hasTargetSupplier.get() ),
+                () -> alignToReflector(currentPositionSupplier.get(), hasTargetSupplier.get() ),
                 (interrupted) -> stop(),
                 () -> false,
                 this
@@ -49,14 +49,14 @@ public class Turret extends SubsystemBase {
     }
 
 
-    private void alignToReflector(double currentPoseidon, boolean hasTarget){
+    private void alignToReflector(double currentPosition, boolean hasTarget){
         if (!hasTarget){
             VoltageOut request = new VoltageOut(5);
             MOTOR.setControl(request);
             return;
         }
 
-        VoltageOut request = new VoltageOut(pidController.calculate(currentPoseidon));
+        VoltageOut request = new VoltageOut(pidController.calculate(currentPosition));
         MOTOR.setControl(request);
     }
 
