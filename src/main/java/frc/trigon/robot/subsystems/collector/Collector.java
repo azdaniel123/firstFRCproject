@@ -19,19 +19,21 @@ public class Collector extends SubsystemBase {
     }
 
     /**
-     * @return a SequentialCommandGroup is to make the collector collect the game piece, wait 3 seconds, eject the game piece, and wait 3 seconds again.
+     * @return a Command that collect wait 3 seconds, eject, wait another 3 seconds, and stop.
      */
     public SequentialCommandGroup getCollectThenEjectCommand() {
         return new SequentialCommandGroup(getCollectCommand().withTimeout(3), getEjectCommand().withTimeout(3));
     }
 
     /**
-     * @return a startEndCommend is to make the collector collect the game piece and stop the motor.
+     * @return a Command that collect.
      */
-    public CommandBase getCollectCommand() {return startEnd(this::collect, this::stop);}
+    public CommandBase getCollectCommand() {
+        return startEnd(this::collect, this::stop);
+    }
 
     /**
-     * @return a startEndCommend is to make the collector eject the game piece and stop the motor.
+     * @return a Command that eject.
      */
     public CommandBase getEjectCommand() {
         return startEnd(this::eject, this::stop);

@@ -22,9 +22,9 @@ public class Steer extends SubsystemBase {
     }
 
     /**
-     * @return a command is to make the steer align to 90 degrees, wait 3 seconds, align to 180 degrees, wait 3 seconds again, align to 0 degrees, and stop the motor.
+     * @return a command that align to 90 degrees, wait 3 seconds, align to 180 degrees, wait another 3 seconds, align to 0 degrees, and stop the motor.
      */
-    public CommandBase getSetTargetAngleCOM(){
+    public CommandBase getSetTargetAngleSequentialCommand() {
         return new SequentialCommandGroup(
                 getSetTargetAngle(90).withTimeout(3),
                 getSetTargetAngle(180).withTimeout(3),
@@ -33,13 +33,15 @@ public class Steer extends SubsystemBase {
     }
 
     /**
-     * create a command was get a Supplier<Double> and align to the value of the Supplier<Double>.
-     * @param angleSupplier is a Supplier<Double> the command aligns with his value.
-     * @return  a command was to get a Supplier<Double> and align to the value of the Supplier<Double>.
+     * Creates a command that gets a supplier and set the target Angle to this value.
+     *
+     * @param angleSupplier is a supplier of the target Angle
+     * @return the command
      */
-    public CommandBase supplierToAngleValue(Supplier<Double> angleSupplier){
+    public CommandBase getSetTargetAngleCommand(Supplier<Double> angleSupplier) {
         return new FunctionalCommand(
-                () -> {},
+                () -> {
+                },
                 () -> setTargetAngle(angleSupplier.get()),
                 (interrupted) -> stop(),
                 () -> false,
@@ -48,15 +50,16 @@ public class Steer extends SubsystemBase {
     }
 
     /**
-     * create a Command that get an angle and align to that angle.
-     * @param angle is a double of the angle we need to double to her.
-     * @return a Command was get an angle, align to that angle and stop the motor.
+     * Creates a command that gets an angle and set the target angle.
+     *
+     * @param angle the target angle
+     * @return the command
      */
-    public CommandBase getSetTargetAngle(double angle){
+    public CommandBase getSetTargetAngle(double angle) {
         return startEnd(
                 () -> setTargetAngle(angle),
                 MOTOR::stopMotor
-                );
+        );
     }
 
     private void setTargetAngle(double getAngle) {

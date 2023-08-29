@@ -19,9 +19,9 @@ public class TurretConstants {
     private static final NeutralModeValue NEUTRAL_MODE_VALUE = NeutralModeValue.Brake;
 
     private static final double
-    P = 1,
-    I=0.2,
-    D=6;
+            P = 1,
+            I = 0.2,
+            D = 6;
 
     static final PIDController PID_CONTROLLER = new PIDController(P, I, D);
 

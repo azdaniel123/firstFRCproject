@@ -32,15 +32,17 @@ public class Turret extends SubsystemBase {
     }
 
     /**
-     * create a command is make the turret align with the reflector.
-     * @param currentPositionSupplier the Position of the reflector.
-     * @param hasTargetSupplier check if you see the reflector.
-     * @return FunctionalCommand was make the turret align to the reflector.
+     * Creates a command that checks if there's a visible target, if there isn't- send the voltage request. if there is- calculate the PID to align the target.
+     *
+     * @param currentPositionSupplier the Position of the reflector
+     * @param hasTargetSupplier       check if you see the reflector
+     * @return the command.
      */
-    public CommandBase getAlignToReflectorCommend(Supplier<Double> currentPositionSupplier, Supplier<Boolean> hasTargetSupplier){
+    public CommandBase getAlignToReflectorCommend(Supplier<Double> currentPositionSupplier, Supplier<Boolean> hasTargetSupplier) {
         return new FunctionalCommand(
-                () -> {},
-                () -> alignToReflector(currentPositionSupplier.get(), hasTargetSupplier.get() ),
+                () -> {
+                },
+                () -> alignToReflector(currentPositionSupplier.get(), hasTargetSupplier.get()),
                 (interrupted) -> stop(),
                 () -> false,
                 this
@@ -49,8 +51,8 @@ public class Turret extends SubsystemBase {
     }
 
 
-    private void alignToReflector(double currentPosition, boolean hasTarget){
-        if (!hasTarget){
+    private void alignToReflector(double currentPosition, boolean hasTarget) {
+        if (!hasTarget) {
             VoltageOut request = new VoltageOut(5);
             MOTOR.setControl(request);
             return;
@@ -60,7 +62,7 @@ public class Turret extends SubsystemBase {
         MOTOR.setControl(request);
     }
 
-    private void stop(){
+    private void stop() {
         MOTOR.stopMotor();
     }
 }
