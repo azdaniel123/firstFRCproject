@@ -1,4 +1,4 @@
-package sterm;
+package frc.trigon.robot.subsystems.steer;
 
 
 import com.ctre.phoenixpro.controls.PositionVoltage;
@@ -22,8 +22,7 @@ public class Steer extends SubsystemBase {
     }
 
     /**
-     * make a command was make the steer align to 90 degrees, wait 3 second, align to 180 degrees, wait 3 second again and align to 0 degrees.
-     * @returna command was make the steer align to 90 degrees, wait 3 second, align to 180 degrees, wait 3 second again, align to 0 degrees and stop the motor.
+     * @return a command was to make the steer align to 90 degrees, wait 3 seconds, align to 180 degrees, wait 3 seconds again, align to 0 degrees, and stop the motor.
      */
     public CommandBase getSetTargetAngleCOM(){
         return new SequentialCommandGroup(
@@ -35,8 +34,8 @@ public class Steer extends SubsystemBase {
 
     /**
      * make a command was get a Supplier<Double> and align to the value of the Supplier<Double>.
-     * @param angleSupplier is a Supplier<Double> the command align to his value.
-     * @return  a command was get a Supplier<Double> and align to the value of the Supplier<Double>.
+     * @param angleSupplier is a Supplier<Double> the command aligns with his value.
+     * @return  a command was to get a Supplier<Double> and align to the value of the Supplier<Double>.
      */
     public CommandBase supplierToAngleValue(Supplier<Double> angleSupplier){
         return new FunctionalCommand(
@@ -49,7 +48,7 @@ public class Steer extends SubsystemBase {
     }
 
     /**
-     * make a Command was get an angle and align to that angle.
+     * make a Command get an angle and align to that angle.
      * @param angle is a double of the angle we need to double to her.
      * @return a Command was get an angle, align to that angle and stop the motor.
      */

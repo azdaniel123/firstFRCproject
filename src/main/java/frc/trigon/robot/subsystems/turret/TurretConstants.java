@@ -1,4 +1,4 @@
-package frc.trigon.robot.turret;
+package frc.trigon.robot.subsystems.turret;
 
 import com.ctre.phoenixpro.configs.TalonFXConfiguration;
 import com.ctre.phoenixpro.hardware.TalonFX;

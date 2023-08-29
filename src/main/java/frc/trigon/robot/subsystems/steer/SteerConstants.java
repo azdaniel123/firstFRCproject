@@ -1,4 +1,4 @@
-package sterm;
+package frc.trigon.robot.subsystems.steer;
 
 import com.ctre.phoenixpro.configs.TalonFXConfiguration;
 import com.ctre.phoenixpro.hardware.TalonFX;
