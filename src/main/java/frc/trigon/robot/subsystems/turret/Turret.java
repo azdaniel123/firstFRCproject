@@ -1,6 +1,5 @@
 package frc.trigon.robot.subsystems.turret;
 
-
 import com.ctre.phoenixpro.controls.PositionVoltage;
 import com.ctre.phoenixpro.controls.VoltageOut;
 import com.ctre.phoenixpro.hardware.TalonFX;
@@ -14,10 +13,6 @@ import java.beans.Encoder;
 import java.util.function.Supplier;
 
 public class Turret extends SubsystemBase {
-
-    // With eager singleton initialization, any static variables/fields used in the 
-    // constructor must appear before the "INSTANCE" variable so that they are initialized 
-    // before the constructor is called when the "INSTANCE" variable initializes.
 
     private final static Turret INSTANCE = new Turret();
 
@@ -33,9 +28,8 @@ public class Turret extends SubsystemBase {
 
     /**
      * Creates a command that checks if there's a visible target, if there isn't- send the voltage request. if there is- calculate the PID to align the target.
-     *
-     * @param currentPositionSupplier the Position of the reflector
-     * @param hasTargetSupplier       check if you see the reflector
+     * @param currentPositionSupplier the Supplier of Position of the reflector
+     * @param hasTargetSupplier if the target is visible
      * @return the command.
      */
     public CommandBase getAlignToReflectorCommend(Supplier<Double> currentPositionSupplier, Supplier<Boolean> hasTargetSupplier) {
@@ -66,83 +60,3 @@ public class Turret extends SubsystemBase {
         MOTOR.stopMotor();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
